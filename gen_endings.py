@@ -8,7 +8,7 @@ import string
 from numpy import rint
 
 whitelist = ["mp4", "webm", "png", "m4v", "gif", "bmp", "jpg",
-             "mov", "mkv", "avi", "flv", "wmv", "mpg", "wav", "webp", "exe"]
+             "mov", "mkv", "avi", "flv", "wmv", "mpg","ts", "wav", "webp", "exe"]
 collection = []
 fast_option = False
 directories =["."]
@@ -38,7 +38,7 @@ def operate_on_file(filepath):
         ['file', '--mime-type', '-b', filepath], stdout=subprocess.PIPE)
     info = temp.stdout.decode('utf-8').strip()
 
-    suggested_ending = info.split("/")[-1].split("-")[-1].strip()
+    suggested_ending = info.split("/")[-1].split("-")[-1].strip().lower()
     if suggested_ending == "empty":
         print("Remove: "+filepath)
         os.remove(filepath)
@@ -59,6 +59,8 @@ def operate_on_file(filepath):
         suggested_ending = "wmv"
     if suggested_ending == "mpeg":
         suggested_ending = "mpg"
+    if suggested_ending == "mp2t":
+        suggested_ending = "ts"
     if suggested_ending == "plain":
         suggested_ending = "txt"
         # if not fast_option:
