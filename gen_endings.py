@@ -8,7 +8,7 @@ import string
 from numpy import rint
 
 whitelist = ["mp4", "webm", "png", "m4v", "gif", "bmp", "jpg",
-             "mov", "mkv", "avi", "flv", "wmv", "mpg","ts", "wav", "webp", "exe"]
+             "mov", "mkv", "avi", "flv", "wmv", "mpg","ts", "wav", "m4a", "webp", "exe"]
 collection = []
 fast_option = False
 directories =["."]
