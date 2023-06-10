@@ -7,11 +7,12 @@ import string
 
 from numpy import rint
 
-whitelist = ["mp4", "webm", "png", "m4v", "gif", "bmp", "jpg",
-             "mov", "mkv", "avi", "flv", "wmv", "mpg","ts", "wav", "m4a", "webp", "exe"]
+whitelist = ["mp4", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg",
+             "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp", "exe"]
 collection = []
 fast_option = False
-directories =["."]
+directories = ["."]
+
 
 def scan_folder(folder):
     f = [f.path for f in os.scandir(folder) if f.is_dir()]
@@ -25,10 +26,11 @@ def scan_folder(folder):
                 continue
             operate_on_file(entry)
 
+
 def operate_on_file(filepath):
     file = filepath.split("/")[-1]
     subdir = os.path.dirname(filepath)
-    if file=="info.txt":
+    if file == "info.txt":
         return
     ending = file.split(".")[-1].strip()
     if ending == "part":
@@ -63,6 +65,8 @@ def operate_on_file(filepath):
         suggested_ending = "ts"
     if suggested_ending == "plain":
         suggested_ending = "txt"
+    if suggested_ending == "svg+xml":
+        suggested_ending = "svg"
         # if not fast_option:
         return
     if(ending != suggested_ending):
@@ -81,6 +85,7 @@ def operate_on_file(filepath):
 
             if not suggested_ending in collection:
                 collection.append(suggested_ending)
+
 
 for directory in directories:
     scan_folder(directory)
