@@ -7,7 +7,7 @@ import string
 
 from numpy import rint
 
-whitelist = ["mp4", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg",
+whitelist = ["mp4", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
              "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp", "exe"]
 collection = []
 fast_option = False
@@ -46,13 +46,21 @@ def operate_on_file(filepath):
         os.remove(filepath)
     if suggested_ending == "stream":
         return
+    if suggested_ending == "symlink":
+        return
     if suggested_ending == "dosexec":
         print("Warning: This is an exe file: "+filepath)
         suggested_ending = "exe"
+    if suggested_ending == "shellscript":
+        suggested_ending = "sh"
     if suggested_ending == "jpeg":
         suggested_ending = "jpg"
+    if suggested_ending == "3gpp":
+        suggested_ending = "3gp"
     if suggested_ending == "quicktime":
         suggested_ending = "mov"
+    if suggested_ending == "realmedia":
+        suggested_ending = "rm"
     if suggested_ending == "matroska":
         suggested_ending = "mkv"
     if suggested_ending == "msvideo":
@@ -89,6 +97,9 @@ def operate_on_file(filepath):
 
 for directory in directories:
     scan_folder(directory)
+
+if not len(collection)>0:
+    exit()
 
 collection.sort()
 print("These endings were suggested, but ignored:")
