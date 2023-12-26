@@ -7,8 +7,9 @@ import string
 
 from numpy import rint
 
-whitelist = ["mp4", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
-             "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp", "exe"]
+whitelist = ["mp4", "mp3", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
+             "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp",
+             "heic", "exe", "zip"]
 collection = []
 fast_option = False
 directories = ["."]
@@ -22,7 +23,7 @@ def scan_folder(folder):
     f = [f.path for f in os.scandir(folder) if f.is_file()]
     if f:
         for entry in f:
-            if entry.endswith(".txt") or entry.endswith(".csv"):
+            if entry.endswith(".txt") or entry.endswith(".csv") or entry.endswith(".part"):
                 continue
             operate_on_file(entry)
 
@@ -40,7 +41,12 @@ def operate_on_file(filepath):
         ['file', '--mime-type', '-b', filepath], stdout=subprocess.PIPE)
     info = temp.stdout.decode('utf-8').strip()
 
-    suggested_ending = info.split("/")[-1].split("-")[-1].strip().lower()
+    #print(info)
+
+    if(info=="audio/mpeg"):
+        suggested_ending = "mp3"
+    else:
+        suggested_ending = info.split("/")[-1].split("-")[-1].strip().lower()
     if suggested_ending == "empty":
         print("Remove: "+filepath)
         os.remove(filepath)
@@ -90,6 +96,7 @@ def operate_on_file(filepath):
             return
         else:
             print(suggested_ending+"\t["+info+"]")
+            print(filepath)
 
             if not suggested_ending in collection:
                 collection.append(suggested_ending)
