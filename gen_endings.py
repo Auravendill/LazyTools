@@ -9,7 +9,7 @@ from numpy import rint
 
 whitelist = ["mp4", "mp3", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
              "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp",
-             "heic", "exe", "zip"]
+             "heic", "exe", "zip", "mod"]
 collection = []
 fast_option = False
 directories = ["."]
