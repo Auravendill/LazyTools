@@ -11,7 +11,7 @@ from numpy import rint
 
 whitelist = ["mp4", "mp3", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
              "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp",
-             "heic", "exe", "zip", "mod"]
+             "heic", "exe", "zip", "mod","py","sh"]
 collection = []
 fast_option = False
 directories = ["."]
@@ -61,6 +61,8 @@ def operate_on_file(filepath):
         suggested_ending = "exe"
     if suggested_ending == "shellscript":
         suggested_ending = "sh"
+    if suggested_ending == "script.python":
+        suggested_ending = "py"
     if suggested_ending == "jpeg":
         suggested_ending = "jpg"
     if suggested_ending == "3gpp":
