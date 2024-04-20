@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from tkinter import TOP, Entry, Label, Button, StringVar
 from tkinterdnd2 import *
 

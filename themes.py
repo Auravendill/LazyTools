@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from os import chdir as cd
 from os import path
 from os import mkdir
