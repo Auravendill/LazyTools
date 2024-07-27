@@ -11,7 +11,7 @@ from numpy import rint
 
 whitelist = ["mp4", "mp3", "webm", "png", "svg", "m4v", "gif", "bmp", "jpg", "pdf","rm","3gp",
              "mov", "mkv", "avi", "flv", "wmv", "mpg", "ts", "wav", "m4a", "webp",
-             "heic", "exe", "zip", "mod","py","sh"]
+             "heic", "exe", "mod","py","sh","obj","stl","skp","nds","n64","gba","ttf","step"]
 collection = []
 fast_option = False
 directories = ["."]
@@ -47,46 +47,67 @@ def operate_on_file(filepath):
 
     if(info=="audio/mpeg"):
         suggested_ending = "mp3"
+    #elif(info=="application/vnd.microsoft.portable-executable"):
+    #    suggested_ending = "exe"
+    elif(info=="application/vnd.debian.binary-package"):
+        suggested_ending = "deb"
+    elif(info=="application/x-nintendo-ds-rom"):
+        suggested_ending = "nds"
+    elif(info=="application/x-n64-rom"):
+        suggested_ending = "n64"
+    elif(info=="application/x-gba-rom"):
+        suggested_ending = "gba"
+    elif(info=="application/vnd.sketchup.skp"):
+        suggested_ending = "skp"
+    elif(info=="font/sfnt"):
+        suggested_ending = "ttf"
+    elif(info=="application/x-iso9660-image"):
+        suggested_ending = "iso"
     else:
         suggested_ending = info.split("/")[-1].split("-")[-1].strip().lower()
     if suggested_ending == "empty":
         print("Remove: "+filepath)
         os.remove(filepath)
-    if suggested_ending == "stream":
+    elif suggested_ending == "stream":
         return
-    if suggested_ending == "symlink":
+    elif suggested_ending == "symlink":
         return
-    if suggested_ending == "dosexec":
+    elif suggested_ending == "dosexec":
         print("Warning: This is an exe file: "+filepath)
         suggested_ending = "exe"
-    if suggested_ending == "shellscript":
+    elif suggested_ending == "shellscript":
         suggested_ending = "sh"
-    if suggested_ending == "script.python":
+    elif suggested_ending == "script.python":
         suggested_ending = "py"
-    if suggested_ending == "jpeg":
+    elif suggested_ending == "jpeg":
         suggested_ending = "jpg"
-    if suggested_ending == "3gpp":
+    elif suggested_ending == "3gpp":
         suggested_ending = "3gp"
-    if suggested_ending == "quicktime":
+    elif suggested_ending == "quicktime":
         suggested_ending = "mov"
-    if suggested_ending == "realmedia":
+    elif suggested_ending == "realmedia":
         suggested_ending = "rm"
-    if suggested_ending == "matroska":
+    elif suggested_ending == "matroska":
         suggested_ending = "mkv"
-    if suggested_ending == "msvideo":
+    elif suggested_ending == "msvideo":
         suggested_ending = "avi"
-    if suggested_ending == "asf":
+    elif suggested_ending == "asf":
         suggested_ending = "wmv"
-    if suggested_ending == "mpeg":
+    elif suggested_ending == "mpeg":
         suggested_ending = "mpg"
-    if suggested_ending == "mp2t":
+    elif suggested_ending == "mp2t":
         suggested_ending = "ts"
-    if suggested_ending == "plain":
+    elif suggested_ending == "plain":
         suggested_ending = "txt"
-    if suggested_ending == "svg+xml":
+    elif suggested_ending == "svg+xml":
         suggested_ending = "svg"
         # if not fast_option:
         return
+    
+    dirty_endings=["obj","stl","step","3mf","gcode","bat"]
+    if ending.lower() in dirty_endings:
+        suggested_ending=ending.lower()
+
     if(ending != suggested_ending):
         if suggested_ending in whitelist:
             print(filepath)
