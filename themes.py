@@ -53,4 +53,4 @@ if not path.exists("Reversal-icon-theme"):
     print("Reversal-icon-theme folder missing. Generate new one")
     cl("git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git")
 cd("Reversal-icon-theme")
-cl("sudo ./install.sh -a")
+cl("sudo ./install.sh -black")
