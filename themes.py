@@ -54,3 +54,13 @@ if not path.exists("Reversal-icon-theme"):
     cl("git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git")
 cd("Reversal-icon-theme")
 cl("sudo ./install.sh -black")
+
+cd ((".."))
+
+print("#"*10+"Grub Theme"+"#"*10)
+
+if not path.exists("fallout-grub-theme"):
+    print("fallout-grub-theme folder missing. Generate new one")
+    cl("git clone https://github.com/shvchk/fallout-grub-theme.git")
+cd("fallout-grub-theme")
+cl("bash ./install.sh --lang German")
