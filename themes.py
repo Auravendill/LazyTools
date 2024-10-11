@@ -66,4 +66,4 @@ cd("fallout-grub-theme")
 cl("bash ./install.sh --lang German")
 
 cd(path.expanduser("~"))
-cl("cargo install cargo-update cargo-cache bottom")
+cl("cargo install topgrade cargo-update cargo-cache bottom")
