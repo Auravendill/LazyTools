@@ -49,13 +49,13 @@ cd("..")
 
 print("#"*10+"Icons"+"#"*10)
 
-if not path.exists("Reversal-icon-theme"):
-    print("Reversal-icon-theme folder missing. Generate new one")
-    cl("git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git")
-cd("Reversal-icon-theme")
-cl("sudo ./install.sh -black")
+# if not path.exists("Reversal-icon-theme"):
+#     print("Reversal-icon-theme folder missing. Generate new one")
+#     cl("git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git")
+# cd("Reversal-icon-theme")
+# cl("sudo ./install.sh -black")
 
-cd ((".."))
+# cd ((".."))
 
 print("#"*10+"Grub Theme"+"#"*10)
 
