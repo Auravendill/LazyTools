@@ -64,8 +64,10 @@ if not path.exists("fallout-grub-theme"):
     cl("git clone https://github.com/shvchk/fallout-grub-theme.git")
 cd("fallout-grub-theme")
 cl("bash ./install.sh --lang German")
-
+"""
 cd(path.expanduser("~"))
 cargo_packages = ["topgrade", "cargo-update", "cargo-cache", "bottom"]
 for cargo_package in cargo_packages:
     cl("cargo install "+cargo_package)
+"""
+
