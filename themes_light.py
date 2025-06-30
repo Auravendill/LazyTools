@@ -17,4 +17,4 @@ cd("Git")
 #Nothing for now here...
 
 cd(path.expanduser("~"))
-cl("cargo install topgrade cargo-update cargo-cache bottom")
+cl("cargo install topgrade cargo-update cargo-cache bottom tealdear")
