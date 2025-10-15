@@ -126,6 +126,11 @@ def operate_on_file(filepath):
             if not suggested_ending in collection:
                 collection.append(suggested_ending)
 
+parameters = sys.argv[1:]
+print("Sys.argv given: "+str(sys.argv))
+if parameters:
+    print("Parameters given: "+str(parameters))
+    directories = parameters
 
 for directory in directories:
     scan_folder(directory)
