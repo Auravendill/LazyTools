@@ -39,6 +39,7 @@ for file in "${files[@]}"; do
 
   tmp_output="${output}.tmp.mkv"
 
+  # Konvertierung
   if ffmpeg -n -i "$file" \
       -c:v libsvtav1 \
       -crf "$CRF" \
@@ -48,12 +49,22 @@ for file in "${files[@]}"; do
       -c:a libopus -b:a 96k \
       "$tmp_output"; then
 
-    mv "$tmp_output" "$output"
-    rm -f "$file"
-    echo "✓ Fertig & Original gelöscht: $filename"
+    # Zusätzliche Prüfung: Datei muss gültig und lesbar sein
+    if [ -s "$tmp_output" ] && \
+       ffprobe -v error -select_streams v:0 \
+               -show_entries stream=codec_name \
+               -of csv=p=0 "$tmp_output" 2>/dev/null | grep -q .; then
+
+      mv "$tmp_output" "$output"
+      rm -f "$file"
+      echo "✓ Fertig & Original gelöscht: $filename"
+    else
+      rm -f "$tmp_output"
+      echo "✗ FEHLER: Ausgabedatei ist ungültig oder beschädigt – Original bleibt erhalten: $filename"
+    fi
   else
     rm -f "$tmp_output"
-    echo "✗ FEHLER bei: $filename (Original bleibt)"
+    echo "✗ FEHLER bei der Konvertierung – Original bleibt erhalten: $filename"
   fi
 
   echo
